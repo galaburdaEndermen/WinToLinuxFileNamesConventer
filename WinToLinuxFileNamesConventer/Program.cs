@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 
@@ -15,6 +16,8 @@ namespace WinToLinuxFileNamesConventer
             DirSearch(@dir);
 
             Console.WriteLine();
+
+            FilesFound = (from f in FilesFound select f).Distinct().ToList();
             foreach (var item in FilesFound)
             {
                 if (Path.GetFileName(item).Length > 100)
@@ -26,6 +29,7 @@ namespace WinToLinuxFileNamesConventer
                     LongFilesFound.Add(item);
                 }
             }
+
             Console.WriteLine("Переiменовувать файли? Y/N");
             var answer = Console.ReadLine();
             if (answer == "Y" || answer == "y") 
